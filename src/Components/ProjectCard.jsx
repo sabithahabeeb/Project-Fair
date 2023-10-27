@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Card, Col, Modal, Row } from 'react-bootstrap'
-import prjctpic from '../Assests/image1.jpeg'
+import prjctpic from '../Assests/imag.png'
 
 function ProjectCard() {
   const [show, setShow] = useState(false);

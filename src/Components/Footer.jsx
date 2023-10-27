@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
-    <div className='d-flex justify-content-center align-items-center bg-info flex-column ' style={{ width: '100%', height: '300px', color: 'white' }}>
+    <div className='d-flex justify-content-center align-items-center bg-info flex-column mt-5 ' style={{ width: '100%', height: '300px', color: 'white' }}>
             <div className="footer-content d-flex justify-content-evenly w-100 flex-wrap">
                 <div className="website" style={{ width: '300px' }}>
                     <h4><i className="fa-solid fa-shield fa-beat-fade"></i>{' '}Project Fair</h4>
