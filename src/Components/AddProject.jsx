@@ -53,14 +53,13 @@ function AddProject() {
                     "Content-Type": "multipart/form-data",
                     "Authorization": `Bearer ${token}`
                 }
-            }
-
-            const result = await addProjectAPI(reqBody, reqHeader)
-            if (result.status === 200) {
-                console.log(result.data);
-            } else {
-                console.log(result);
-                console.log(result.response.data);
+                const result = await addProjectAPI(reqBody, reqHeader)
+                if (result.status === 200) {
+                    console.log(result.data);
+                } else {
+                    console.log(result);
+                    console.log(result.response.data);
+                }
             }
 
         }
