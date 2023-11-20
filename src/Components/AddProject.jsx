@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import { addProjectAPI } from '../Services/allAPI';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddProject() {
     const [show, setShow] = useState(false);
@@ -49,16 +51,18 @@ function AddProject() {
             reqBody.append("website", website)
 
             if (token) {
-                reqHeader = {
+              const  reqHeader = {
                     "Content-Type": "multipart/form-data",
                     "Authorization": `Bearer ${token}`
                 }
                 const result = await addProjectAPI(reqBody, reqHeader)
                 if (result.status === 200) {
                     console.log(result.data);
+                    handleClose()
+                    alert("Project Added")
                 } else {
                     console.log(result);
-                    console.log(result.response.data);
+                   toast.warning(result.response.data);
                 }
             }
 
@@ -117,6 +121,8 @@ function AddProject() {
                     <Button onClick={handleAdd} variant="primary">Add</Button>
                 </Modal.Footer>
             </Modal>
+            <ToastContainer position="top-right"
+                autoClose={2000} theme="colored" />
         </>
     )
 }
