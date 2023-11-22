@@ -6,13 +6,14 @@ import { allProjectsAPI } from '../Services/allAPI'
 
 function Projects() {
   const [allProjects, setAllProjects] = useState([])
+  const [searchkey,setSearchKey] = useState()
   const getallProjects = async () => {
     if (sessionStorage.getItem("token")) {
       const token = sessionStorage.getItem("token")
       const reqHeader = {
         "Content-Type": "multipart/form-data", "Authorization": `Bearer ${token}`
       }
-      const result = await allProjectsAPI(reqHeader)
+      const result = await allProjectsAPI(searchkey,reqHeader)
       if (result.status === 200) {
         setAllProjects(result.data)
       } else {
@@ -23,15 +24,15 @@ function Projects() {
 
   useEffect(() => {
     getallProjects()
-  }, [])
+  }, [searchkey])
   return (
     <div>
       <Header />
       <div style={{ marginTop: '100px' }} className='projects'></div>
       <h1 className='text-center mb-5'>All Projects</h1>
-      <div className="d-flex justify-content-center align-items-center w-100">
+      <div className="d-flex justify-content-center align-items-center  w-100">
         <div className="d-flex border w-50 rounded">
-          <input type="text" className='form-control' placeholder='Search Project by Technology used' />
+          <input onChange={e=>setSearchKey(e.target.value)} type="text" className='form-control' placeholder='Search Project by Technology used' />
           <i style={{ marginRight: '40px' }} class="fa-solid fa-magnifying-glass fa-rotate-90"></i>
         </div>
       </div>
