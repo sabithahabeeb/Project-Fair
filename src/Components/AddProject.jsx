@@ -42,7 +42,7 @@ function AddProject() {
         e.preventDefault()
         const { title, languages, overview, projectImage, github, website } = projectDetails
         if (!title || !languages || !overview || !projectImage || !github || !website) {
-            alert("Please fill the form completely!!!")
+            toast.info("Please fill the form completely!!!")
         } else {
             const reqBody = new FormData()
             reqBody.append("title", title)
