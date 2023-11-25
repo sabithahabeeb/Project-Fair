@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AddProject from './AddProject'
-import { userProjectAPI } from '../Services/allAPI'
+import { deleteProjectAPI, userProjectAPI } from '../Services/allAPI'
 import { toast } from 'react-toastify'
-import { addProjectResponseContext } from '../Context/ContextShare'
+import { addProjectResponseContext, editProjectResposeContext } from '../Context/ContextShare'
 import { Alert } from 'react-bootstrap'
 import EditProject from './EditProject'
 
 function MyProjects() {
     const { addProjectResponse, setAddProjectResponse } = useContext(addProjectResponseContext)
+    const {editProjectResponse,setEditProjectResponse} = useContext(editProjectResposeContext)
     const [userProjects, setUserProjects] = useState([])
     const getUserProjects = async () => {
         if (sessionStorage.getItem("token")) {
@@ -27,7 +28,21 @@ function MyProjects() {
 
     useEffect(() => {
         getUserProjects()
-    }, [addProjectResponse])
+    }, [addProjectResponse,editProjectResponse])
+
+    const handleDelete = async (id)=>{
+        const token = sessionStorage.getItem("token")
+        const reqHeader = {
+            "Content-Type": "application/json", "Authorization": `Bearer ${token}`
+        }
+        const result = await deleteProjectAPI(id,reqHeader)
+        if(result.status===200){
+            // page reloded
+            getUserProjects()
+        }else{
+            toast.error(result.response.data)
+        }
+    }
     return (
         <>
             <div className="card shadow p-3 mt-3">
@@ -47,7 +62,7 @@ function MyProjects() {
                     {userProjects?.length > 0 ? userProjects.map(project => (
                         <div className="border d-flex align-items-center mb-3 rounded p-2">
                             <h5>{project.title}</h5>
-                            <div className="icon ms-auto">
+                            <div className="icon ms-auto d-flex">
                                 <EditProject project={project} />
                                 <a href={`${project.github}`} target='_blank' className="btn"><i className="fa-brands fa-github fa-2x"></i></a>
                                 <button className="btn"><i className="fa-solid fa-trash fa-2x"></i></button>

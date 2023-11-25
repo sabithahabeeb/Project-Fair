@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import { BASE_URL } from '../Services/baseurl';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { editProjectAPI } from '../Services/allAPI';
+import { editProjectResposeContext } from '../Context/ContextShare';
 
 
 function EditProject({ project }) {
+    const {editProjectResponse,setEditProjectResponse} = useContext(editProjectResposeContext)
     const [projectDetails, setProjectDetails] = useState({
         id: project._id, title: project.title, languages: project.languages, overview: project.overview, github: project.github, website: project.website, projectImage: ""
     })
@@ -45,11 +47,12 @@ function EditProject({ project }) {
                     "Content-Type": "multipart/form-data", "Authorization": `Bearer ${token}`
                 }
                 // api call
-                const result = await editProjectAPI(id,reqBody,reqHeader)
-                if(result.status===200){
+                const result = await editProjectAPI(id, reqBody, reqHeader)
+                if (result.status === 200) {
                     handleClose()
                     // pass response to my projects
-                }else{
+                    setEditProjectResponse(result.data)
+                } else {
                     console.log(result);
                     toast.error(result.response.data)
                 }
@@ -58,11 +61,12 @@ function EditProject({ project }) {
                     "Content-Type": "application/json", "Authorization": `Bearer ${token}`
                 }
                 //   api call
-                const result = await editProjectAPI(id,reqBody,reqHeader)
-                if(result.status===200){
+                const result = await editProjectAPI(id, reqBody, reqHeader)
+                if (result.status === 200) {
                     handleClose()
                     // pass response to my projects
-                }else{
+                    setEditProjectResponse(result.data)
+                } else {
                     console.log(result);
                     toast.error(result.response.data)
                 }
