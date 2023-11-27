@@ -8,11 +8,11 @@ function ContextShare({ children }) {
     return (
         <>
             <addProjectResponseContext.Provider value={{ addProjectResponse, setAddProjectResponse }}>
-                {children}
-            </addProjectResponseContext.Provider>
-            <editProjectResposeContext.Provider value={{ editProjectResponse, setEditProjectResponse }}>
-                {children}
-            </editProjectResposeContext.Provider>
+                <editProjectResposeContext.Provider value={{ editProjectResponse, setEditProjectResponse }}>
+                    {children}
+                    </editProjectResposeContext.Provider > </addProjectResponseContext.Provider> 
+           
+          
         </>
 
     )

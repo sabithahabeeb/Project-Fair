@@ -65,7 +65,7 @@ function MyProjects() {
                             <div className="icon ms-auto d-flex">
                                 <EditProject project={project} />
                                 <a href={`${project.github}`} target='_blank' className="btn"><i className="fa-brands fa-github fa-2x"></i></a>
-                                <button className="btn"><i className="fa-solid fa-trash fa-2x"></i></button>
+                                <button onClick={()=>handleDelete(project._id)} className="btn"><i className="fa-solid fa-trash fa-2x"></i></button>
 
                             </div>
 
