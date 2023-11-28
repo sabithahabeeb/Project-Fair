@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Collapse } from 'react-bootstrap'
+import { BASE_URL } from '../Services/baseurl'
 
 function Profile() {
     const [userProfile,setUserProfile] = useState({
@@ -41,14 +42,14 @@ function Profile() {
                     <div className='row shadow p-5 justify-content-center mt-3'>
                         {/* upload picture */}
                         <label className='text-center'>
-                            <input style={{ display: 'none' }} type="file" />
-                            <img width={'200px'} height={'200px'} className='rounded-circle' src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="upload picture" />
+                            <input style={{ display: 'none' }} type="file" onChange={e=>setUserProfile({...userProfile,Profile:e.target.files[0]})} />
+                            <img width={'200px'} height={'200px'} className='rounded-circle' src={preview?preview:`${BASE_URL}/uploads/${existingImage}`} alt="upload picture" />
                         </label>
                         <div className="mt-3">
-                            <input className='form-control' placeholder='GitHub' type="text" />
+                            <input className='form-control' placeholder='GitHub' type="text" value={userProfile.github}  onChange={e=>setUserProfile({...userProfile,github:e.target.value})}/>
                         </div>
                         <div className="mt-3">
-                            <input className='form-control' placeholder='LinkedIn' type="text" />
+                            <input className='form-control' placeholder='LinkedIn' type="text" value={userProfile.linkedin}  onChange={e=>setUserProfile({...userProfile,linkedin:e.target.value})}/>
                         </div>
                         <div className="btn btn-warning mt-3">
                            Update
