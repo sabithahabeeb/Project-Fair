@@ -7,7 +7,7 @@ import { editUserAPI } from '../Services/allAPI';
 
 function Profile() {
     const [userProfile, setUserProfile] = useState({
-        username: "", email: "", password: "", Profile: "", github: "", linkedin: ""
+        username: "", email: "", password: "", profile: "", github: "", linkedin: ""
     })
     const [existingImage, setExistingImage] = useState("")
     const [preview, setPreview] = useState("")
@@ -15,19 +15,19 @@ function Profile() {
 
     useEffect(() => {
         const user = JSON.parse(sessionStorage.getItem("existingUser"))
-        setUserProfile({ ...userProfile, username: user.username, email: user.email, password: user.password, Profile: "", github: user.github, linkedin: user.linkedin })
-        setExistingImage(user.Profile)
+        setUserProfile({ ...userProfile, username: user.username, email: user.email, password: user.password, profile: "", github: user.github, linkedin: user.linkedin })
+        setExistingImage(user.profile)
 
     }, [open])
     console.log(existingImage);
     useEffect(() => {
-        if (userProfile.Profile) {
-            setPreview(URL.createObjectURL(userProfile.Profile))
+        if (userProfile.profile) {
+            setPreview(URL.createObjectURL(userProfile.profile))
         } else {
             setPreview("")
         }
 
-    }, [userProfile.Profile])
+    }, [userProfile.profile])
 
     const handleProfileUpdate = async () => {
         const { username, email, password, profile, github, linkedin } = userProfile
@@ -85,7 +85,7 @@ function Profile() {
                 <div className='row shadow p-5 justify-content-center mt-3'>
                     {/* upload picture */}
                     <label className='text-center'>
-                        <input style={{ display: 'none' }} type="file" onChange={e => setUserProfile({ ...userProfile, Profile: e.target.files[0] })} />
+                        <input style={{ display: 'none' }} type="file" onChange={e => setUserProfile({ ...userProfile, profile: e.target.files[0] })} />
                         {
                             existingImage !== "" ?
                                 <img width={'200px'} height={'200px'} className='rounded-circle' src={preview ? preview : `${BASE_URL}/uploads/${existingImage}`} alt="upload picture" /> :

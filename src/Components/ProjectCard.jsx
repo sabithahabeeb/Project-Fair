@@ -11,7 +11,7 @@ function ProjectCard({ project }) {
   return (
     <>
 
-      {project && <Card className='shabow mb-5 btn ' onClick={handleShow}>
+      {project && <Card style={{height:'350px', width:'500px'}} className='shadow mb-5 btn ' onClick={handleShow}>
         <Card.Img variant="top" src={project ? `${BASE_URL}/uploads/${project.projectImage }`: prjctpic} />
         <Card.Body>
           <Card.Title>{project.title}</Card.Title>

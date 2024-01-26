@@ -59,7 +59,7 @@ function Home() {
         <marquee scrollAmount={20}>
           <div className='d-flex justify-content-between'>
             {homeProjects?.length > 0 ? homeProjects.map((project) => (
-              <div className='me-5' >
+              <div  className='me-5' >
                 <ProjectCard project={project} />
               </div>
             )):null
